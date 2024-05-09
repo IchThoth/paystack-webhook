@@ -1,5 +1,9 @@
 package config
 
+import (
+	"flag"
+)
+
 type AppConfig struct {
 	Env     string
 	Version string
@@ -30,6 +34,21 @@ type AppConfig struct {
 
 }
 
-func (a *AppConfig) Parse() {
+var cfg AppConfig
 
+func (a *AppConfig) Parse() {
+	flag.StringVar(&cfg.Env, "application environment", a.env(), "")
+
+	//db
+	flag.StringVar(&cfg.Db.Dsn, "PostgreSQL Database",a.dbDsn(),"")
+	flag.IntVar(&cfg.Db.MaxOpenConns,"Maximum amount of connnections in pool",a.dbMaxOpenConn(),"")
+	flag.IntVar(&cfg.Db.MaxIdleConns,"Maximum amount of Idle Connections",a.dbMaxIdle(),"")
+	flag.
+	//mailer service
+
+	//paystack webhook service.. this will probably exposes payment inforation of users that triggered the
+	//webhook
+	
+	
 }
+
